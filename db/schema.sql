@@ -1,0 +1,1 @@
+CREATE DATABASE wines_db;
