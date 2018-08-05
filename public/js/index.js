@@ -3,7 +3,8 @@ var $mealText = $("#meal-input");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
-
+// define global variables
+var winePairArray =[]
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
@@ -12,14 +13,14 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/history",
+      data: JSON.stringify(winePairArray)
     });
   },
   getPairings: function() {
     return $.ajax({
       url: "api/mealpairs",
-      type: "GET"
+      type: "GET",
     });
   },
   deleteExample: function(id) {
@@ -79,9 +80,16 @@ var handleMealSubmit = function(event) {
     // THIS IS WHERE YOU STOPED ON SATURDAY
     // THIS IS WHERE YOU STOPED ON SATURDAY
   API.getPairings().then(function(data) {
-    console.log(data[0]["meal"])
-    var pairings = data.map(function(pairing) {
-      console.log(pairing.meal) })
+    // console.log(mealText.text + "lalalala")
+    // console.log(data.length)
+    // console.log(data[5]["meal"])
+    for (var i = 0; i < data.length; i++)
+    if (mealText.text === data[i]["meal"]) {
+      winePairArray += data[i]["winePair"];
+    }
+    console.log(winePairArray)
+    // var pairings = data.map(function(pairing) {
+    //   console.log(pairing.meal) })
     // console.log(pairings)
   })
 

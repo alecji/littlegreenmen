@@ -1,17 +1,24 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
+  // Get all meal pairs
   app.get("/api/mealpairs", function(req, res) {
     db.MealPair.findAll({}).then(function(dbMealPair) {
       res.json(dbMealPair);
     });
   });
+  
+  // Get most recent history
+  app.get("/api/history", function(req, res) {
+    db.MealPair.findAll({}).then(function(dbHistory) {
+      res.json(dbHistory);
+    });
+  });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // Create a new history entry
+  app.post("/api/history", function(req, res) {
+    db.History.create(req.body).then(function(dbHistory) {
+      res.json(dbHistory);
     });
   });
 

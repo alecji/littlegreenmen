@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "root",
-    "database": "OA_exampledb",
+    "database": "OA_developmentdb",
     "host": "localhost",
     "dialect": "mysql"
   },

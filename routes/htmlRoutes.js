@@ -11,11 +11,15 @@ module.exports = function(app) {
     });
   });
   
-  // Load results page
+  // Load results page and display latest match
   app.get("/results", function(req, res) {
-    db.MealPair.findAll({}).then(function(dbMealPairs) {
+    // Find most recent history
+    db.History.findAll({
+      limit: 1,
+      order: [ [ 'createdAt', 'DESC']]
+    }).then(function(dbHistoryPairs) {
       res.render("results", {
-        examples: dbMealPairs
+        winePairs: dbHistoryPairs
       });
     });
   });
