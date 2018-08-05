@@ -76,6 +76,12 @@ module.exports = function (sequelize, DataTypes) {
     }
   ]
 
+
+  // THIS IS WHERE YOU STOPED ON SATURDAY
+  // THIS IS WHERE YOU STOPED ON SATURDAY
+  // THIS IS WHERE YOU STOPED ON SATURDAY
+  // THIS IS WHERE YOU STOPED ON SATURDAY
+
   setTimeout(function () {
 
     MealPair.bulkCreate(mealData, { returning: true });

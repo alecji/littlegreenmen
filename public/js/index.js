@@ -1,5 +1,5 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
+var $mealText = $("#meal-input");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
@@ -16,9 +16,9 @@ var API = {
       data: JSON.stringify(example)
     });
   },
-  getExamples: function() {
+  getPairings: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/mealpairs",
       type: "GET"
     });
   },
@@ -59,24 +59,31 @@ var refreshExamples = function() {
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+// handleMealSubmit is called whenever we submit a new request
+// Find the matching wine in the DB and refresh the page
+var handleMealSubmit = function(event) {
   event.preventDefault();
-
-  var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+  
+  var mealText = {
+    text: $mealText.val().trim(),
   };
+  console.log(mealText.text);
+  alert(mealText.text + "!");
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!(mealText.text)) {
+    alert("You must enter a meal!");
     return;
   }
-
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
+    // THIS IS WHERE YOU STOPED ON SATURDAY
+    // THIS IS WHERE YOU STOPED ON SATURDAY
+    // THIS IS WHERE YOU STOPED ON SATURDAY
+    // THIS IS WHERE YOU STOPED ON SATURDAY
+  API.getPairings().then(function(data) {
+    console.log(data[0]["meal"])
+    var pairings = data.map(function(pairing) {
+      console.log(pairing.meal) })
+    // console.log(pairings)
+  })
 
   $exampleText.val("");
   $exampleDescription.val("");
@@ -95,5 +102,5 @@ var handleDeleteBtnClick = function() {
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$submitBtn.on("click", handleMealSubmit);
+// $exampleList.on("click", ".delete", handleDeleteBtnClick);
