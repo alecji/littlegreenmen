@@ -2,7 +2,7 @@ var db = require("../models");
 
 module.exports = function(app) {
   // Get all examples
-  app.get("/api/examples", function(req, res) {
+  app.get("/api/mealpairs", function(req, res) {
     db.MealPair.findAll({}).then(function(dbMealPair) {
       res.json(dbMealPair);
     });
