@@ -15,11 +15,16 @@ module.exports = function(app) {
   app.get("/results", function(req, res) {
     // Find most recent history
     db.History.findAll({
+      raw: true,
+      attributes: ["meal", "winePairings"],
       limit: 1,
       order: [ [ 'createdAt', 'DESC']]
     }).then(function(dbHistoryPairs) {
+      console.log(dbHistoryPairs)
+      var rawHistoryPairs = dbHistoryPairs[0]
+      console.log(rawHistoryPairs);
       res.render("results", {
-        winePairs: dbHistoryPairs
+        historyObject: rawHistoryPairs
       });
     });
   });

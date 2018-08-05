@@ -11,13 +11,14 @@
             <form class="create-form">
 
                 <div class="form-group">
-                    <label for="meal-input">Meal:</label>
+                    <label for="meal-input">Meal: </label>
                     <input type="text" id="meal-input" name="meal">
                 </div>
 
                 <button type="submit" id="submit">Pair!</button>
             </form>
-            <p>Pairs with: {{winePairArray}} </p>
+            <p>Your meal: {{historyObject.meal}} </p>
+            <p>Pairs with: {{historyObject.winePairings}} </p>
         </div>
     </div>
 </div>

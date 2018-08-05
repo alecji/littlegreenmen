@@ -4,26 +4,26 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 // define global variables
-var winePairArray =[]
+var winePairArray = []
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveHistory: function (newHistory) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
       url: "api/history",
-      data: JSON.stringify(winePairArray)
+      data: newHistory
     });
   },
-  getPairings: function() {
+  getPairings: function () {
     return $.ajax({
       url: "api/mealpairs",
       type: "GET",
     });
   },
-  deleteExample: function(id) {
+  deleteExample: function (id) {
     return $.ajax({
       url: "api/examples/" + id,
       type: "DELETE"
@@ -32,9 +32,9 @@ var API = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshExamples = function () {
+  API.getExamples().then(function (data) {
+    var $examples = data.map(function (example) {
       var $a = $("<a>")
         .text(example.text)
         .attr("href", "/example/" + example.id);
@@ -62,9 +62,9 @@ var refreshExamples = function() {
 
 // handleMealSubmit is called whenever we submit a new request
 // Find the matching wine in the DB and refresh the page
-var handleMealSubmit = function(event) {
+var handleMealSubmit = function (event) {
   event.preventDefault();
-  
+
   var mealText = {
     text: $mealText.val().trim(),
   };
@@ -75,36 +75,46 @@ var handleMealSubmit = function(event) {
     alert("You must enter a meal!");
     return;
   }
-    // THIS IS WHERE YOU STOPED ON SATURDAY
-    // THIS IS WHERE YOU STOPED ON SATURDAY
-    // THIS IS WHERE YOU STOPED ON SATURDAY
-    // THIS IS WHERE YOU STOPED ON SATURDAY
-  API.getPairings().then(function(data) {
-    // console.log(mealText.text + "lalalala")
-    // console.log(data.length)
-    // console.log(data[5]["meal"])
+
+  API.getPairings().then(function (data) {
+    // run matching logic
     for (var i = 0; i < data.length; i++)
-    if (mealText.text === data[i]["meal"]) {
-      winePairArray += data[i]["winePair"];
-    }
+      if (mealText.text === data[i]["meal"]) {
+        winePairArray += data[i]["winePair"];
+      }
     console.log(winePairArray)
+      var mealString = JSON.stringify(mealText.text)
+      var wineString = JSON.stringify(winePairArray)
+    // Make a newHistory object
+    var newHistory = {
+      meal: mealString,
+      winePairings: wineString
+    }
+    ;
+
+    console.log(newHistory)
+
+    $.post("/api/history", newHistory)
+    // On success, run the following code
+    .then(function() { 
+      // reset page
+    location.reload();  
+    })
+
     // var pairings = data.map(function(pairing) {
     //   console.log(pairing.meal) })
     // console.log(pairings)
   })
-
-  $exampleText.val("");
-  $exampleDescription.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
+  API.deleteExample(idToDelete).then(function () {
     refreshExamples();
   });
 };
