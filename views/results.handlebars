@@ -1,0 +1,27 @@
+{{!-- body html goes here --}}
+<div class="container bg-light border my-3 pb-3">
+    <div class="row">
+        <div class="col-12 text-center">
+            <h1>WINE TIME</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h2>What's your main course?</h2>
+            <form class="create-form">
+
+                <div class="form-group">
+                    <label for="meal-input">Meal: </label>
+                    <input type="text" id="meal-input" name="meal">
+                </div>
+
+                <button type="submit" id="submit">Pair!</button>
+            </form>
+            <p>Your meal: {{historyObject.meal}} </p>
+            <p>Pairs with: {{historyObject.winePairings}} </p>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="/js/index.js"></script>

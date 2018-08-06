@@ -1,17 +1,29 @@
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  // Get all meal pairs
+  app.get("/api/mealpairs", function(req, res) {
+    db.MealPair.findAll({}).then(function(dbMealPair) {
+      res.json(dbMealPair);
+    });
+  });
+  
+  // Get most recent history
+  app.get("/api/history", function(req, res) {
+    db.History.findAll({}).then(function(dbHistory) {
+      res.json(dbHistory);
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // Create a new history entry
+  app.post("/api/history", function(req, res) {
+    console.log("!!!!!!!!!! " + req);
+    // helper function to extract letters only ??
+    db.History.create({
+      meal: req.body.meal,
+      winePairings: req.body.winePairings
+    }).then(function(dbHistory) {
+      res.json(dbHistory);
     });
   });
 

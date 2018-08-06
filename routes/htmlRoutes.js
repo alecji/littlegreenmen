@@ -3,10 +3,28 @@ var db = require("../models");
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
+    db.MealPair.findAll({}).then(function(dbMealPairs) {
       res.render("index", {
         msg: "Welcome!",
-        examples: dbExamples
+        examples: dbMealPairs
+      });
+    });
+  });
+  
+  // Load results page and display latest match
+  app.get("/results", function(req, res) {
+    // Find most recent history
+    db.History.findAll({
+      raw: true,
+      attributes: ["meal", "winePairings"],
+      limit: 1,
+      order: [ [ 'createdAt', 'DESC']]
+    }).then(function(dbHistoryPairs) {
+      console.log(dbHistoryPairs)
+      var rawHistoryPairs = dbHistoryPairs[0]
+      console.log(rawHistoryPairs);
+      res.render("results", {
+        historyObject: rawHistoryPairs
       });
     });
   });
