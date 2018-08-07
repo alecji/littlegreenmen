@@ -137,78 +137,116 @@
 //     {
 //         subType: "Sauvignon Blanc",
 //         type: "Dry White",
+//         description: "bright, crisp, refreshing"
+//         country: "France"
 //     },
 //     {
 //         subType: "Grüner Veltliner",
 //         type: "Dry White",
+//         description: "zesty, heat, summer"
+//         country: "Austria"
 //     },
 //     {
 //         subType: "Pinot Grigio",
 //         type: "Dry White",
+//         description: "pool, summer, fresh"
+//         country: "Italy"
 //     },
 //     {
 //         subType: "Albariño",
 //         type: "Dry White",
+//         description: "dramatic, ocean, sea"
+//         country: "Spain"
 //     },
 //     {
 //         subType: "Gewürztraminer",
 //         type: "Sweet White",
+//         description: "roses, lavish, river"
+//         country: "Gernmany"
 //     },
 //     {
 //         subType: "Müller-Thurgau",
 //         type: "Sweet White",
+//         description: "plain, workers, laborers"
+//         country: "Germany"
 //     },
 //     {
 //         subType: "Malvasia",
 //         type: "Sweet White",
+//         description: "mediterranean, sea, islands"
+//         country: "Greece"
 //     },
 //     {
 //         subType: "Moscato",
 //         type: "Sweet White",
+//         description: "pool, ocean, beach"
+//         country: "Italy"
 //     },
 //     {
 //         subType: "Riesling",
 //         type: "Sweet White",
+//         description: "medieval, estate, villa "
+//         country: "Germany"
 //     },
 //     {
 //         subType: "Chardonnay",
 //         type: "Rich White",
+//         description: "sensual"
+//         country:
 //     },
 //     {
 //         subType: "Roussanne",
 //         type: "Rich White",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Marsanne",
 //         type: "Rich White",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Viognier",
 //         type: "Rich White",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Champagne",
 //         type: "Sparkling",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Prosecco",
 //         type: "Sparkling",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Cava",
 //         type: "Sparkling",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "St. Laurent",
 //         type: "Light Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Pinot Noir",
 //         type: "Light Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Zweigelt",
 //         type: "Light Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Gamay",
@@ -217,58 +255,86 @@
 //     {
 //         subType: "Tempranillo",
 //         type: "Medium Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Sangiovese",
 //         type: "Medium Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Zinfandel",
 //         type: "Medium Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Grenache",
 //         type: "Medium Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Merlot",
 //         type: "Medium Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Cabernet Sauvignon",
 //         type: "Bold Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Monastrell",
 //         type: "Bold Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Aglianico",
 //         type: "Bold Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Malbec",
 //         type: "Bold Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Syrah",
 //         type: "Bold Red",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Late Harvest",
 //         type: "Dessert",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Ice Wine",
 //         type: "Dessert",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Sherry",
 //         type: "Dessert",
+//         description:
+//         country:
 //     },
 //     {
 //         subType: "Port",
 //         type: "Dessert",
+//         description:
+//         country:
 //     }
 // ]
 
