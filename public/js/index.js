@@ -110,12 +110,12 @@ var handleBookSubmit = function (event) {
     var queryURL;
     API.getNYT().then(function (data) {
       console.log(data.results.lists[0].books[0]);
-      console.log(data.results.lists.books[0]["description"])
+      console.log(data.results.lists[0].books[0]["description"].length)
       // for all books returned
-      for (var j = 0; data.results.lists.books.length; j++) {
+      for (var j = 0; data.results.lists[0].books.length; j++) {
         // store the specific description and lowercase
-        var descriptionLower = data.results.lists.books[j]["description"].toLowerCase();
-        bookTitle = data.results.lists.books[j]["title"];
+        var descriptionLower = data.results.lists[0].books[j]["description"].toLowerCase();
+        bookTitle = data.results.lists[0].books[j]["title"];
         // for all wine descriptions extract 
         for (var k = 0; k < descriptionExtract.length; k++) {
           // if wine description matches a word in the book description
