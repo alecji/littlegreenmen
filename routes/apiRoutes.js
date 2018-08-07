@@ -8,6 +8,13 @@ module.exports = function(app) {
     });
   });
   
+  // Get all wine subtypes
+  app.get("/api/subtypes", function(req, res) {
+    db.SubType.findAll({}).then(function(dbSubType) {
+      res.json(dbSubType);
+    });
+  });
+
   // Get most recent history
   app.get("/api/history", function(req, res) {
     db.History.findAll({}).then(function(dbHistory) {

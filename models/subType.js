@@ -2,8 +2,8 @@ module.exports = function (sequelize, DataTypes) {
     var SubType = sequelize.define("SubType", {
         subType: DataTypes.TEXT,
         type: DataTypes.TEXT,
-        meal: DataTypes.TEXT,
-        winePair: DataTypes.TEXT
+        description: DataTypes.TEXT,
+        country: DataTypes.TEXT
     });
 
     SubType.sync();
@@ -23,6 +23,7 @@ module.exports = function (sequelize, DataTypes) {
             country: "Argentina"
         }
     ]
+
     // CHECK TO SEE IF TABLE HAS BEEN SEEDED
     SubType.findOne({ where: { type: 'Sweet White' } }).then(function (data) {
         // If no matches found seed the table

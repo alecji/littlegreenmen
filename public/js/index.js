@@ -1,8 +1,7 @@
 // Get references to page elements
 var $mealText = $("#meal-input");
-var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $bookSubmitBtn = $("#book");
 // define global variables
 var winePairArray = []
 // The API object contains methods for each kind of request we'll make
@@ -23,41 +22,12 @@ var API = {
       type: "GET",
     });
   },
-  deleteExample: function (id) {
+  getSubTypes: function () {
     return $.ajax({
-      url: "api/examples/" + id,
-      type: "DELETE"
+      url: "api/subtypes",
+      type: "GET",
     });
   }
-};
-
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function () {
-  API.getExamples().then(function (data) {
-    var $examples = data.map(function (example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
 };
 
 // handleMealSubmit is called whenever we submit a new request
@@ -94,18 +64,48 @@ var handleMealSubmit = function (event) {
 
     console.log(newHistory)
 
+
     $.post("/api/history", newHistory)
     // On success, run the following code
     .then(function() { 
       // reset page
     location.reload();  
     })
-
-    // var pairings = data.map(function(pairing) {
-    //   console.log(pairing.meal) })
-    // console.log(pairings)
   })
 };
+
+// handleBookSubmit is called whenever we submit a new book request
+// Find the matching book in the DB and refresh the page
+// var handleBookSubmit = function (event) {
+//   event.preventDefault();
+
+//   API.getSubTypes().then(function (data) {
+//     // run matching logic
+//     for (var i = 0; i < data.length; i++)
+//       if (mealText.text === data[i]["meal"]) {
+//         winePairArray += data[i]["winePair"];
+//       }
+//     console.log(winePairArray)
+//       var mealString = JSON.stringify(mealText.text)
+//       var wineString = JSON.stringify(winePairArray)
+//     // Make a newHistory object
+//     var newHistory = {
+//       meal: mealString,
+//       winePairings: wineString
+//     }
+//     ;
+
+//     console.log(newHistory)
+
+
+//     $.post("/api/history", newHistory)
+//     // On success, run the following code
+//     .then(function() { 
+//       // reset page
+//     location.reload();  
+//     })
+//   })
+// };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
@@ -119,6 +119,7 @@ var handleDeleteBtnClick = function () {
   });
 };
 
-// Add event listeners to the submit and delete buttons
+// Add event listeners to the submit and book buttons
 $submitBtn.on("click", handleMealSubmit);
+$bookSubmitBtn.on("click", handleBookSubmit);
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
