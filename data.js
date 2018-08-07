@@ -303,8 +303,8 @@
 //     {
 //         subType: "Malbec",
 //         type: "Bold Red",
-//         description:
-//         country:
+//         description: "adventure, quest, hero"
+//         country: "Argentina"
 //     },
 //     {
 //         subType: "Syrah",
