@@ -1,4 +1,3 @@
-
 // // All Data
 // var allData = [
 //     {
@@ -327,8 +326,4 @@
 //         country:
 //     }
 // ]
-
-
-
-
-// module.exports = data;
+// module.exports = data
