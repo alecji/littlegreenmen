@@ -20,9 +20,9 @@ module.exports = function(app) {
       limit: 1,
       order: [ [ 'createdAt', 'DESC']]
     }).then(function(dbHistoryPairs) {
-      console.log(dbHistoryPairs)
+      console.log("dbHistoryPairs: " + dbHistoryPairs);
       var rawHistoryPairs = dbHistoryPairs[0]
-      console.log(rawHistoryPairs);
+      console.log("RawhistoryPairs: " + rawHistoryPairs);
       res.render("results", {
         historyObject: rawHistoryPairs
       });
