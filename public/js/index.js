@@ -1,3 +1,8 @@
+//htmljs
+$(document).ready(function(){
+  $('.modal').modal();
+});
+
 // Get references to page elements
 var $mealText = $("#meal-input");
 var $exampleDescription = $("#example-description");
