@@ -149,38 +149,28 @@
 //     {
 //         subType: "Pinot Grigio",
 //         type: "Dry White",
-//         description: "pool, summer, fresh"
-//         country: "Italy"
 //     },
 //     {
 //         subType: "Albariño",
 //         type: "Dry White",
-//         description: "dramatic, ocean, sea"
-//         country: "Spain"
+//         description: "mountain, romance, king",
+//         location: "Spain"
 //     },
 //     {
 //         subType: "Gewürztraminer",
 //         type: "Sweet White",
-//         description: "roses, lavish, river"
-//         country: "Gernmany"
 //     },
 //     {
 //         subType: "Müller-Thurgau",
 //         type: "Sweet White",
-//         description: "plain, workers, laborers"
-//         country: "Germany"
 //     },
 //     {
 //         subType: "Malvasia",
 //         type: "Sweet White",
-//         description: "mediterranean, sea, islands"
-//         country: "Greece"
 //     },
 //     {
 //         subType: "Moscato",
 //         type: "Sweet White",
-//         description: "pool, ocean, beach"
-//         country: "Italy"
 //     },
 //     {
 //         subType: "Riesling",
