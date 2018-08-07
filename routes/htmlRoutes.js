@@ -4,15 +4,20 @@ module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
     db.MealPair.findAll({}).then(function(dbMealPairs) {
-      res.render("index", {
-        msg: "Welcome!",
-        examples: dbMealPairs
-      });
+      res.render("index");
     });
   });
   
+  app.get("/login", function(req,res) {
+    res.render("login")
+  })
+
+  app.get("/signup", function(req,res) {
+    res.render("signup")
+  })
+
   // Load results page and display latest match
-  app.get("/results", function(req, res) {
+  app.get("/search", function(req, res) {
     // Find most recent history
     db.History.findAll({
       raw: true,
@@ -20,10 +25,10 @@ module.exports = function(app) {
       limit: 1,
       order: [ [ 'createdAt', 'DESC']]
     }).then(function(dbHistoryPairs) {
-      console.log("dbHistoryPairs: " + dbHistoryPairs);
-      var rawHistoryPairs = dbHistoryPairs[0]
+      console.log("dbHistoryPairs: " + dbHistoryPairs) ;
+      var rawHistoryPairs = dbHistoryPairs[0] ;
       console.log("RawhistoryPairs: " + rawHistoryPairs);
-      res.render("results", {
+      res.render("search", {
         historyObject: rawHistoryPairs
       });
     });
