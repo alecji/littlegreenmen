@@ -19,7 +19,8 @@
 <body>
     <nav>
         <div class="nav-wrapper">
-            <a href="#" class="brand-logo right">Logo</a>
+            <img class="brand-logo right logoImg" src="media/Wine-Glass-icon.png" alt="Omniscient Aerator" height="50px" width="50px">
+            <a href="#" class="brand-logo center">Omniscient Aerator</a>
             <ul id="nav-mobile" class="left hide-on-med-and-down">
                 <li>
                     <a href="#">Home</a>
@@ -35,14 +36,14 @@
     </nav>
 
     <div class="container">
-
+        
 
         <!-- Food item dropdown menu -->
         <div class="row">
             <div class="input-field col s12">
-                <select>
+                <select name="foodDropdown">
                     <option value="" disabled selected>Select a food item!</option>
-                    <option value="Red Meat">Red Meat</option>
+                    <option value="Red Meat" id="redMeat" >Red Meat</option>
                     <option value="White Meat">White Meat</option>
                     <option value="Fish">Fish</option>
                     <option value="Vegetables">Vegetables</option>
@@ -54,25 +55,14 @@
         </div>
 
         <!-- Large Buttons -->
-        <div class="row">
-            <div class="col s6">
-                <a class="waves-effect waves-light btn-large" id="redBtn">
-                    <i class="material-icons left"></i>Red</a>
-            </div>
-            <div class="col s6">
-                <a class="waves-effect waves-light btn-large" id="whiteBtn">
-                    <i class="material-icons left"></i>White</a>
-            </div>
+        <div class="row mainWines">
+            <!-- <div class="col s6"><a class="waves-effect waves-light btn-large" id="redBtn">Red</a></div>
+            <div class="col s6"><a class="waves-effect waves-light btn-large" id="whiteBtn">White</a></div> -->
         </div>
+
         <!-- Small Buttons -->
-
         <div class="row subWines">
-            <div class="col s3"><a class="waves-effect waves-light btn">Chardonnay</a></div>
-            <div class="col s3"><a class="waves-effect waves-light btn">Gewürztraminer</a></div>
-            <div class="col s3"><a class="waves-effect waves-light btn">Pinot Grigio</a></div>
-            <div class="col s3"><a class="waves-effect waves-light btn">Sauvignon blanc</a></div>
         </div>
-
     </div>
 
 

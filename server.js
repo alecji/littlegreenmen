@@ -27,6 +27,7 @@ app.use(cookieParser());
 
 // initialize express-session to allow us track the logged-in user across sessions.
 app.use(
+
     session({
         key: "user_sid",
         secret: "somerandonstuffs",
@@ -36,6 +37,7 @@ app.use(
             expires: 600000
         }
     })
+
 );
 
 // Handlebars

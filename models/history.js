@@ -1,3 +1,4 @@
+
 module.exports = function (sequelize, DataTypes) {
     var History = sequelize.define("History", {
         meal: DataTypes.TEXT,
@@ -10,5 +11,7 @@ module.exports = function (sequelize, DataTypes) {
 
     History.sync();
 
-    return History;
+  History.sync();
+
+  return History;
 };
