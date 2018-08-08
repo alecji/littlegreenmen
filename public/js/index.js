@@ -7,8 +7,10 @@
 var $mealText = $("#meal-input");
 var $submitBtn = $("#submit");
 var $bookSubmitBtn = $("#bookSubmit");
+var $bookSubmitBtn = $("#wineTypeSubmit");
 // define global variables
-var winePairArray = []
+var winePairArray = [];
+var wineSubTypeArray = [];
 var descriptionExtract;
 var bookOutput = [];
 var bookTitle = [];
@@ -81,23 +83,33 @@ var handleMealSubmit = function (event) {
     // run matching logic
     for (var i = 0; i < data.length; i++)
       if (mealText.text === data[i]["meal"]) {
-        winePairArray += data[i]["winePair"];
+        winePairArray.push(data[i]["winePair"]);
       }
     console.log(winePairArray)
     var mealString = JSON.stringify(mealText.text)
-    var wineString = JSON.stringify(winePairArray)
+    var wineString = JSON.stringify(winePairArray.join())
+    console.log(wineString)
+    console.log(winePairArray)
+    // Find the matching subtypes for the types
     // Make a newHistory object
     var newHistory = {
       meal: mealString,
-      winePairings: wineString,
+      winePairings: wineString
     };
     console.log(newHistory);
     $.post("/api/history", newHistory)
       // On success, run the following code
       .then(function (result) {
-        console.log(result);
-        // reset page
-        location.reload();
+        console.log(winePairArray);
+
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+
       })
   })
 };
@@ -168,16 +180,17 @@ var handleBookSubmit = function (event) {
         // // putHistory = JSON.stringify(putHistory)
         // putHistory = jQuery.parseJSON(JSON.stringify(putHistory));
         $.post("/api/history", putHistory)
-        // On success, run the following code
-        .then(function (result) {
-          // console.log(result);
-          // reset page
-          location.reload();
-        });
+          // On success, run the following code
+          .then(function (result) {
+            // console.log(result);
+            // reset page
+            location.reload();
+          });
       });
     });
   });
 };
+
 
 // Add event listeners to the submit and book buttons
 $submitBtn.on("click", handleMealSubmit);
