@@ -2,19 +2,19 @@ var db = require("../models");
 
 module.exports = function (app) {
 
-  // Get all meal pairs
-  app.get("/api/mealpairs", function (req, res) {
-    db.MealPair.findAll({}).then(function (dbMealPair) {
-      res.json(dbMealPair);
+    // Get all meal pairs
+    app.get("/api/mealpairs", function (req, res) {
+        db.MealPair.findAll({}).then(function (dbMealPair) {
+            res.json(dbMealPair);
+        });
     });
-  });
 
 
-  // Get all wine subtypes
-  app.get("/api/subtypes", function (req, res) {
-    db.SubType.findAll({}).then(function (dbSubType) {
-      res.json(dbSubType);
-
+    // Get all wine subtypes
+    app.get("/api/subtypes", function (req, res) {
+        db.SubType.findAll({}).then(function (dbSubType) {
+            res.json(dbSubType);
+        });
     });
 
     // Get all wine subtypes
@@ -52,6 +52,7 @@ module.exports = function (app) {
                 });
         }
         else if (req.body.winePairingsSubType) {
+            console.log("body: %j", req.body.winePairingsSubType);
             db.History.update(
                 {
                     wineSubType: JSON.parse(req.body.winePairingsSubType)
