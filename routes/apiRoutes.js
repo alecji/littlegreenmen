@@ -52,6 +52,7 @@ module.exports = function (app) {
                 });
         }
         else if (req.body.winePairingsSubType) {
+            console.log("body: %j", req.body.winePairingsSubType);
             db.History.update(
                 {
                     wineSubType: JSON.parse(req.body.winePairingsSubType)

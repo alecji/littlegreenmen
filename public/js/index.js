@@ -143,7 +143,8 @@ var handleWineTypeSubmit = function (event) {
     // Find the matching subtypes for the types
     // Make a newHistory object
     var newHistory = {
-      winePairingsSubType: wineSubTypeString
+      winePairingsSubType: wineSubTypeString,
+      recentId: "2"
     };
     console.log(newHistory);
     $.post("/api/history", newHistory)
@@ -232,7 +233,7 @@ var handleBookSubmit = function (event) {
           .then(function (result) {
             // console.log(result);
             // reset page
-            location.reload();
+            // location.reload();
           });
       });
     });
