@@ -22,31 +22,53 @@ module.exports = function (app) {
     });
   });
 
-  // Create a new history entry
+  // Create a new history entry or update most recent one
   app.post("/api/history", function (req, res) {
-    console.log("!!!!!!!!!! " + req);
+    var data = JSON.parse(req.body);
+    // logic to determine update or create
+    console.log(data + " !*!*!*!*!-----")
+    if (req.body.bookSuggestion) {
+      db.History.update(
+        {
+          wineSubType: req.body.wineSubType,
+          bookSuggestion: req.body.bookSuggestion
+        },
+        {
+          // where the id matches the most recent history id        
+          where:
+          {
+            id: req.body.id
+          }
+        })
+        .then(function (dbHistory) {
+          res.json(dbHistory);
+        });
+    }
+    // console.log("!!!!!!!!!! " + req.values);
     // helper function to extract letters only ??
-    db.History.create({
-      meal: req.body.meal,
-      winePairings: req.body.winePairings
-    }).then(function (dbHistory) {
-      res.json(dbHistory);
-    });
-  });
-
-  // PUT route for updating posts
-  app.put("/api/history", function (req, res) {
-    db.History.update(req.body,
-      {
-        wineSubType: req.body.wineSubType,
-        bookSuggestion: req.body.bookSuggestion,
-        // where the id matches the most recent history id        
-        where: {
-          id: req.body.historyId
-        }
-      })
-      .then(function (dbHistory) {
+    else {
+      db.History.create({
+        meal: req.body.meal,
+        winePairings: req.body.winePairings
+      }).then(function (dbHistory) {
         res.json(dbHistory);
       });
+    }
   });
+
+  // // PUT route for updating posts
+  // app.put("/api/history", function (req, res) {
+  //   console.log(req + "!*!*!*!*!*!")
+  //   db.History.update({
+  //     // where the id matches the most recent history id        
+  //     where: {
+  //       id: req.body.id
+  //     },
+  //     wineSubType: req.body.wineSubType,
+  //     bookSuggestion: req.body.bookSuggestion,
+  //   })
+  //     .then(function (dbHistory) {
+  //       res.json(dbHistory);
+  //     });
+  // });
 };

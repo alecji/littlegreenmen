@@ -27,14 +27,20 @@ var API = {
     });
   },
   // method to update history
-  updateHistory: function (newHistory) {
+  updateHistory: function (putHistory) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "PUT",
       url: "api/history",
-      data: newHistory
+      data: putHistory
+    });
+  },
+  getHistory: function () {
+    return $.ajax({
+      url: "api/history",
+      type: "GET",
     });
   },
   getPairings: function () {
@@ -86,20 +92,14 @@ var handleMealSubmit = function (event) {
     var newHistory = {
       meal: mealString,
       winePairings: wineString,
-      wineSubType: null,
-      bookSuggestion: null
-    }
-      ;
-
-    console.log(newHistory)
-
-
+    };
+    console.log(newHistory);
     $.post("/api/history", newHistory)
       // On success, run the following code
       .then(function (result) {
-        console.log (result);
+        console.log(result);
         // reset page
-        location.reload();
+        // location.reload();
       })
   })
 };
@@ -146,25 +146,42 @@ var handleBookSubmit = function (event) {
         }
       }
       // Randomly pick from the bookOutput array
-      var randomBookMatch = bookOutput[Math.floor(Math.random() * bookOutput.length)];
+      var randomBookMatch = JSON.stringify(bookOutput[Math.floor(Math.random() * bookOutput.length)]);
       // Make a newHistory object
-      var putHistory = {
-        // send the wine subtype
-        wineSubType: userSelectedSubType,
-        // send the book title
-        bookSuggestion: randomBookMatch,
-        // send the previous history ID
-        updateHistoryId: historyId
-      };
-
-      console.log(putHistory)
-      // make the put request
-      $.post("/api/history", putHistory)
+      console.log(randomBookMatch);
+      // Get most recent history id
+      API.getHistory().then(function (data) {
+        var historyLength = data.length - 1;
+        // get the ID of the most recent history entry
+        historyIdNum = data[historyLength]["id"]
+        historyId = historyIdNum.toString();
+        idString = JSON.stringify(historyId);
+        userSelectedSubType = JSON.stringify(userSelectedSubType);
+        var putHistory = {
+          // send the wine subtype
+          wineSubType: userSelectedSubType,
+          // send the book title
+          bookSuggestion: randomBookMatch,
+          // send the previous history ID
+          id: idString
+        };
+        // putHistory = JSON.stringify(putHistory);
+        console.log(putHistory);
+        // putHistory = JSON.stringify(putHistory)
+        putHistory = jQuery.parseJSON(JSON.stringify(putHistory));
+        $.ajax({
+          type: "POST",
+          url: "/api/history",
+          contentType: "application/json",
+          data: putHistory
+        })
         // On success, run the following code
-        .then(function () {
+        .then(function (result) {
+          console.log(result);
           // reset page
-          // location.reload();
+          location.reload();
         });
+      });
     });
   });
 };
