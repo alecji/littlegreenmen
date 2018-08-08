@@ -57,6 +57,10 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> d2de4d558dd393875e300dcd72f859a8d8ec5ac1
 module.exports = function (app) {
 	// middleware function to check for logged-in users
 	// var sessionChecker = function (req, res, next) {
