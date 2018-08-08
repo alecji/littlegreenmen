@@ -76,7 +76,7 @@ module.exports = function (app) {
 		// Find most recent history
 		db.History.findAll({
 			raw: true,
-			attributes: ["meal", "winePairings", "wineSubType", "bookSuggestion"],
+			attributes: ["meal", "winePairings", "wineSubType", "bookSuggestion", "winePairingsSubTypes"],
 			limit: 1,
 			order: [['createdAt', 'DESC']]
 		}).then(function (dbHistoryPairs) {
@@ -94,7 +94,7 @@ module.exports = function (app) {
 		// Find most recent history
 		db.History.findAll({
 			raw: true,
-			attributes: ["meal", "winePairings", "wineSubType", "bookSuggestion"],
+			attributes: ["meal", "winePairings", "wineSubType", "bookSuggestion", "winePairingsSubTypes"],
 			limit: 1,
 			order: [['createdAt', 'DESC']]
 		}).then(function (dbHistoryPairs) {

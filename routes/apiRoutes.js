@@ -9,7 +9,7 @@ module.exports = function (app) {
     });
 
     // Get all wine subtypes
-    app.get("/api/subtypes", function (req, res) {
+    app.post("/api/subtypes", function (req, res) {
         db.SubType.findAll({}).then(function (dbSubType) {
             res.json(dbSubType);
         });
@@ -42,6 +42,22 @@ module.exports = function (app) {
                     res.json(dbHistory);
                 });
         }
+        else if (req.body.winePairingsSubType) {
+            db.History.update(
+                {
+                    wineSubType: JSON.parse(req.body.winePairingsSubType)
+                },
+                {
+                    // where the id matches the most recent history id
+                    where: {
+                        id: JSON.parse(req.body.recentId)
+                    }
+                })
+                .then(function (dbHistory) {
+                    // console.log(dbHistory + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+                    res.json(dbHistory);
+                });
+        }
         // console.log("!!!!!!!!!! " + req.values);
         // helper function to extract letters only ??
         else {
@@ -54,20 +70,4 @@ module.exports = function (app) {
             });
         }
     });
-
-    // // PUT route for updating posts
-    // app.put("/api/history", function (req, res) {
-    //   console.log(req + "!*!*!*!*!*!")
-    //   db.History.update({
-    //     // where the id matches the most recent history id
-    //     where: {
-    //       id: req.body.id
-    //     },
-    //     wineSubType: req.body.wineSubType,
-    //     bookSuggestion: req.body.bookSuggestion,
-    //   })
-    //     .then(function (dbHistory) {
-    //       res.json(dbHistory);
-    //     });
-    // });
 };
