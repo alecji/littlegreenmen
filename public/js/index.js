@@ -10,7 +10,9 @@ var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 // define global variables
 var winePairArray = []
-// The API object contains methods for each kind of request we'll make
+
+
+// The API object contains methods for each kind of request we'll make for the Wine Pairings
 var API = {
   saveHistory: function (newHistory) {
     return $.ajax({
@@ -36,34 +38,6 @@ var API = {
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function () {
-  API.getExamples().then(function (data) {
-    var $examples = data.map(function (example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
-
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
-
-      $li.append($button);
-
-      return $li;
-    });
-
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
 
 // handleMealSubmit is called whenever we submit a new request
 // Find the matching wine in the DB and refresh the page
