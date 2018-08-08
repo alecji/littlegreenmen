@@ -8,17 +8,13 @@ var $mealText = $("#meal-input");
 var $submitBtn = $("#submit");
 var $bookSubmitBtn = $("#bookSubmit");
 // define global variables
-var winePairArray = [];
+var winePairArray = []
 var descriptionExtract;
 var bookOutput = [];
 var bookTitle = [];
 var descriptionExtractString;
 var historyId;
 // The API object contains methods for each kind of request we'll make
-<<<<<<< HEAD
-=======
-
->>>>>>> d2de4d558dd393875e300dcd72f859a8d8ec5ac1
 var API = {
   saveHistory: function (newHistory) {
     return $.ajax({
@@ -75,8 +71,6 @@ var handleMealSubmit = function (event) {
   var mealText = {
     text: $mealText.val().trim(),
   };
-  console.log(mealText.text);
-  alert(mealText.text + "!");
 
   if (!(mealText.text)) {
     alert("You must enter a meal!");
