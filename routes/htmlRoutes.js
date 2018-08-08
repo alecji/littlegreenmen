@@ -29,10 +29,11 @@ module.exports = function (app) {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password
-      }).then(function(user) {
-        console.log("111111: " + res.body);
+      }).then(function(dbCreate) {
         // req.session.user = user.dataValues;
-        res.redirect("login");
+        console.log(dbCreate)
+        //fix later with other statuses, catch errors, etc
+        res.status(200).json({message: "successful account creation"});
       });
       // .catch(error, functio) {
       // 	res.render("signup");
@@ -79,36 +80,34 @@ module.exports = function (app) {
   //
   // Load results page and display latest match
   app.get("/search", function(req, res) {
-    // Find most recent history
-    db.History.findAll({
-      raw: true,
-      attributes: ["meal", "winePairings"],
-      limit: 1,
-      order: [["createdAt", "DESC"]]
-    }).then(function(dbHistoryPairs) {
-      console.log("dbHistoryPairs: " + dbHistoryPairs);
-      var rawHistoryPairs = dbHistoryPairs[0];
-      console.log("RawhistoryPairs: " + rawHistoryPairs);
-      res.render("search", {
-        historyObject: rawHistoryPairs
+    // // Find most recent history
+    // db.History.findAll({
+    //   raw: true,
+    //   attributes: ["meal", "winePairings"],
+    //   limit: 1,
+    //   order: [["createdAt", "DESC"]]
+    // }).then(function(dbHistoryPairs) {
+    //   console.log("dbHistoryPairs: " + dbHistoryPairs);
+    //   var rawHistoryPairs = dbHistoryPairs[0];
+    //   console.log("RawhistoryPairs: " + rawHistoryPairs);
+      res.render("search");
+    });
+  
+    // Load example page and pass in an example by id
+    app.get("/example/:id", function(req, res) {
+      db.Example.findOne({ where: { id: req.params.id } }).then(function(
+        dbExample
+      ) {
+        res.render("example", {
+          example: dbExample
+        });
       });
     });
-  });
-
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
-      });
+  
+    // Render 404 page for any unmatched routes
+    app.get("*", function(req, res) {
+      res.render("404");
     });
-  });
-
-  // Render 404 page for any unmatched routes
-  app.get("*", function(req, res) {
-    res.render("404");
-  });
-
-};
+  
+  
+  };
