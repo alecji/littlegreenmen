@@ -1,6 +1,7 @@
 //htmljs
 $(document).ready(function(){
   $('.modal').modal();
+  $('select').formSelect()
 });
 
 // Get references to page elements
@@ -126,4 +127,7 @@ var handleDeleteBtnClick = function () {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleMealSubmit);
+
+$("select[name='foodDropdown']").change(function () {
+
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);

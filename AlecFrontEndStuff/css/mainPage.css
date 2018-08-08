@@ -1,9 +1,22 @@
 .nav-wrapper {
-    background-color: #a20000;
+    background-color: #790000;
 }
 
 body {
-    background-image: url(../media/xF1uE9.jpg);
+    background-image: url(../media/wine2.jpeg);
     background-color: #cccccc;
     background-size: cover;
  }
+
+ .logoImg{
+    margin-top: 5px;
+    margin-right: 10px;
+ }
+
+ #mainPageBackground {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    object-fit: cover;
+    height: 100%; width: 100%;
+  }
