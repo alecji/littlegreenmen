@@ -1,7 +1,7 @@
 //htmljs
-$(document).ready(function(){
-  $('.modal').modal();
-});
+// $(document).ready(function(){
+//   $('.modal').modal();
+// });
 
 // Get references to page elements
 var $mealText = $("#meal-input");
@@ -13,6 +13,7 @@ var descriptionExtract;
 var bookOutput = [];
 var bookTitle = [];
 var descriptionExtractString;
+var historyId;
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveHistory: function (newHistory) {
@@ -21,6 +22,17 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
+      url: "api/history",
+      data: newHistory
+    });
+  },
+  // method to update history
+  updateHistory: function (newHistory) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "PUT",
       url: "api/history",
       data: newHistory
     });
@@ -73,7 +85,9 @@ var handleMealSubmit = function (event) {
     // Make a newHistory object
     var newHistory = {
       meal: mealString,
-      winePairings: wineString
+      winePairings: wineString,
+      wineSubType: null,
+      bookSuggestion: null
     }
       ;
 
@@ -82,7 +96,8 @@ var handleMealSubmit = function (event) {
 
     $.post("/api/history", newHistory)
       // On success, run the following code
-      .then(function () {
+      .then(function (result) {
+        console.log (result);
         // reset page
         location.reload();
       })
@@ -96,7 +111,7 @@ var handleBookSubmit = function (event) {
 
   var userSelectedSubType;
   // STAND IN FOR TESTING
-  userSelectedSubType = "Malvasia"
+  userSelectedSubType = "Malbec"
 
   console.log(userSelectedSubType);
 
@@ -113,38 +128,42 @@ var handleBookSubmit = function (event) {
     }
     // for later query url manipulation
     var queryURL;
+    // get NYT data for matching
     API.getNYT().then(function (data) {
-      console.log(data.results.lists[0].books[0]);
-      console.log(data.results.lists[0].books[0]["description"].length)
       // for all books returned
-      for (var j = 0; data.results.lists[0].books.length; j++) {
+      for (var j = 0; j < data.results.lists[0].books.length; j++) {
         // store the specific description and lowercase
         var descriptionLower = data.results.lists[0].books[j]["description"].toLowerCase();
         bookTitle = data.results.lists[0].books[j]["title"];
         // for all wine descriptions extract 
         for (var k = 0; k < descriptionExtract.length; k++) {
           // if wine description matches a word in the book description
+          console.log(descriptionExtract[k])
           if (descriptionLower.includes(descriptionExtract[k])) {
+            // push to matches array
             bookOutput.push(bookTitle);
           }
         }
       }
+      // Randomly pick from the bookOutput array
+      var randomBookMatch = bookOutput[Math.floor(Math.random() * bookOutput.length)];
       // Make a newHistory object
-      var newHistory = {
-        meal: mealString,
-        winePairings: wineString,
+      var putHistory = {
+        // send the wine subtype
         wineSubType: userSelectedSubType,
-        bookSuggestion: bookTitle
+        // send the book title
+        bookSuggestion: randomBookMatch,
+        // send the previous history ID
+        updateHistoryId: historyId
       };
 
-      console.log(newHistory)
-
-
-      $.post("/api/history", newHistory)
+      console.log(putHistory)
+      // make the put request
+      $.post("/api/history", putHistory)
         // On success, run the following code
         .then(function () {
           // reset page
-          location.reload();
+          // location.reload();
         });
     });
   });

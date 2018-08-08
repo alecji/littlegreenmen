@@ -34,16 +34,24 @@ module.exports = function(app) {
     });
   });
 
-  // Load example page and pass in an example by id
-  app.get("/example/:id", function(req, res) {
-    db.Example.findOne({ where: { id: req.params.id } }).then(function(
-      dbExample
-    ) {
-      res.render("example", {
-        example: dbExample
+  // RESULTS PAGE JUST FOR MY TESTING - Kyle
+  app.get("/results", function(req, res) {
+    // Find most recent history
+    db.History.findAll({
+      raw: true,
+      attributes: ["meal", "winePairings"],
+      limit: 1,
+      order: [ [ 'createdAt', 'DESC']]
+    }).then(function(dbHistoryPairs) {
+      console.log("dbHistoryPairs: " + dbHistoryPairs) ;
+      var rawHistoryPairs = dbHistoryPairs[0] ;
+      console.log("RawhistoryPairs: " + rawHistoryPairs);
+      res.render("results", {
+        historyObject: rawHistoryPairs
       });
     });
   });
+  // END RESULTS PAGE JUST FOR MY TESTING - Kyle
 
   // Render 404 page for any unmatched routes
   app.get("*", function(req, res) {
