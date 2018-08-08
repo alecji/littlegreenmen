@@ -61,13 +61,13 @@ module.exports = function (app) {
 			});
 		});
 
-	app.get("/history", function (req, res) {
-		if (req.session.user && req.cookies.user_sid) {
-			res.render("dashboard");
-		} else {
-			res.render("search");
-		}
-	});
+		app.route("/history")
+		.get( function (req, res) {
+			res.render("history");
+		})
+		.post(function (req, res) {
+			res.render("history")
+		});
 
 	//
 	// Load results page and display latest match
