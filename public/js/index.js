@@ -163,23 +163,18 @@ var handleBookSubmit = function (event) {
           // send the book title
           bookSuggestion: randomBookMatch,
           // send the previous history ID
-          id: idString
+          recentId: idString
         };
         // putHistory = JSON.stringify(putHistory);
         console.log(putHistory);
-        // putHistory = JSON.stringify(putHistory)
-        putHistory = jQuery.parseJSON(JSON.stringify(putHistory));
-        $.ajax({
-          type: "POST",
-          url: "/api/history",
-          contentType: "application/json",
-          data: putHistory
-        })
+        // // putHistory = JSON.stringify(putHistory)
+        // putHistory = jQuery.parseJSON(JSON.stringify(putHistory));
+        $.post("/api/history", putHistory)
         // On success, run the following code
         .then(function (result) {
           console.log(result);
           // reset page
-          location.reload();
+          // location.reload();
         });
       });
     });

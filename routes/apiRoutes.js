@@ -24,9 +24,7 @@ module.exports = function (app) {
 
   // Create a new history entry or update most recent one
   app.post("/api/history", function (req, res) {
-    var data = JSON.parse(req.body);
-    // logic to determine update or create
-    console.log(data + " !*!*!*!*!-----")
+    console.log("body: %j", req.body)
     if (req.body.bookSuggestion) {
       db.History.update(
         {
@@ -37,7 +35,7 @@ module.exports = function (app) {
           // where the id matches the most recent history id        
           where:
           {
-            id: req.body.id
+            id: req.body.recentId
           }
         })
         .then(function (dbHistory) {
