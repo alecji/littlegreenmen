@@ -1,14 +1,16 @@
 var db = require("../models");
 
-module.exports = function(app) {
-  // middleware function to check for logged-in users
-  // var sessionChecker = function (req, res, next) {
-  // 	if (req.session.user && req.cookies.user_sid) {
-  // 		res.render("search");
-  // 	} else {
-  // 		next();
-  // 	}
-  // };
+
+// END RESULTS PAGE JUST FOR MY TESTING - Kyle
+module.exports = function (app) {
+	// middleware function to check for logged-in users
+	// var sessionChecker = function (req, res, next) {
+	// 	if (req.session.user && req.cookies.user_sid) {
+	// 		res.render("search");
+	// 	} else {
+	// 		next();
+	// 	}
+	// };
 
   // Load index page
   app.get("/", function(req, res) {
@@ -108,4 +110,5 @@ module.exports = function(app) {
   app.get("*", function(req, res) {
     res.render("404");
   });
+
 };
