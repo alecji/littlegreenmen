@@ -1,7 +1,10 @@
 //htmljs
-// $(document).ready(function(){
-//   $('.modal').modal();
-// });
+
+$(document).ready(function(){
+  $('.modal').modal();
+  $('select').formSelect()
+});
+
 
 // Get references to page elements
 var $mealText = $("#meal-input");
@@ -181,5 +184,9 @@ var handleBookSubmit = function (event) {
 
 // Add event listeners to the submit and book buttons
 $submitBtn.on("click", handleMealSubmit);
-$bookSubmitBtn.on("click", handleBookSubmit);
+
+
+$("select[name='foodDropdown']").change(function () {
+
+
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
