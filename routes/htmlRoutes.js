@@ -21,7 +21,7 @@ module.exports = function (app) {
 		})
 		.post(function (req, res) {
 			console.log(req.body)
-			db.User.create({
+			db.Users.create({
 				username: req.body.username,
 				email: req.body.email,
 				password: req.body.password
