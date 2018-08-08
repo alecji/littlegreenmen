@@ -9,7 +9,7 @@ $("#loginsubmit").on("click", function() {
   };
   $.post("/login", loginObj).then(function(data, statusText, jqXHR) {
     if (jqXHR.status === 200) {
-      location.replace("/");
+      location.replace("/search");
     }
   });
 });
@@ -26,5 +26,10 @@ $("#SUsubmit").on("click", function() {
       .val()
       .trim()
   };
-  $.post("/signup", userObj);
+  $.post("/signup", userObj).then(function(data, statusText, jqXHR) {
+    console.log(jqXHR.status)
+    if (jqXHR.status === 200) {
+      location.replace("/login");
+    }
+  });
 });
