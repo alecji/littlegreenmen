@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- Jquery CDN -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <!-- Materialize Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+    <!-- Materialize Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="css/mainPage.css">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo right">Logo</a>
+            <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <li>
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">References</a>
+                </li>
+                <li>
+                    <a href="#">History</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+
+
+        <!-- Food item dropdown menu -->
+        <div class="row">
+            <div class="input-field col s12">
+                <select>
+                    <option value="" disabled selected>Select a food item!</option>
+                    <option value="Red Meat">Red Meat</option>
+                    <option value="White Meat">White Meat</option>
+                    <option value="Fish">Fish</option>
+                    <option value="Vegetables">Vegetables</option>
+                    <option value="Roasted Vegetables">Roasted Vegetables</option>
+                    <option value="Shellfish">Shellfish</option>
+                    <option value="Sweets">Sweets</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Large Buttons -->
+        <div class="row">
+            <div class="col s6">
+                <a class="waves-effect waves-light btn-large" id="redBtn">
+                    <i class="material-icons left"></i>Red</a>
+            </div>
+            <div class="col s6">
+                <a class="waves-effect waves-light btn-large" id="whiteBtn">
+                    <i class="material-icons left"></i>White</a>
+            </div>
+        </div>
+        <!-- Small Buttons -->
+
+        <div class="row subWines">
+            <div class="col s3"><a class="waves-effect waves-light btn">Chardonnay</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn">Gewürztraminer</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn">Pinot Grigio</a></div>
+            <div class="col s3"><a class="waves-effect waves-light btn">Sauvignon blanc</a></div>
+        </div>
+
+    </div>
+
+
+
+</body>
+<script src="main.js"></script>
+
+</html>
