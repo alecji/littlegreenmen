@@ -58,10 +58,6 @@ var API = {
       url: "api/subtypes",
       type: "GET",
     });
-<<<<<<< HEAD
-=======
-
->>>>>>> d2de4d558dd393875e300dcd72f859a8d8ec5ac1
   },
   getNYT: function () {
     return $.ajax({
@@ -70,10 +66,6 @@ var API = {
     });
   }
 };
-<<<<<<< HEAD
-=======
-
->>>>>>> d2de4d558dd393875e300dcd72f859a8d8ec5ac1
 
 // handleMealSubmit is called whenever we submit a new request
 // Find the matching wine in the DB and refresh the page
