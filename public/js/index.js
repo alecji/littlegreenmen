@@ -1,9 +1,9 @@
 //htmljs
 
-$(document).ready(function(){
-  $('.modal').modal();
-  $('select').formSelect()
-});
+// $(document).ready(function(){
+//   $('.modal').modal();
+//   $('select').formSelect()
+// });
 
 
 // Get references to page elements
@@ -127,18 +127,19 @@ var handleWineTypeSubmit = function (event) {
   // }
 
   // STAND IN
-  var wineType = "Bold Red";
+  var wineType = "Rich White";
 
   API.getSubTypes().then(function (data) {
     // run matching logic
+    console.log(data);
     for (var i = 0; i < data.length; i++)
-    console.log("data.length")
+    // console.log(data[i]["type"])
+    // console.log(Object.values(data[i][3]))
       if (wineType === data[i]["type"]) {
         wineSubTypeArray.push(data[i]["subType"]);
       }
-    var wineSubTypeString = JSON.stringify(winePairArray.join())
-    console.log(wineSubTypeString)
-    console.log(wineSubTypeArray)
+    var wineSubTypeString = JSON.stringify(wineSubTypeArray.join());
+    console.log(wineSubTypeString);
     // Find the matching subtypes for the types
     // Make a newHistory object
     var newHistory = {
