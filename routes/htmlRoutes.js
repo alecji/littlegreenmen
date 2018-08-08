@@ -40,6 +40,44 @@ module.exports = function (app) {
       // });
     });
 
+
+	//
+	// Load results page and display latest match
+	app.get("/search", function (req, res) {
+		// Find most recent history
+		db.History.findAll({
+			raw: true,
+			attributes: ["meal", "winePairings", "wineSubType", "bookSuggestion", "winePairingsSubTypes"],
+			limit: 1,
+			order: [['createdAt', 'DESC']]
+		}).then(function (dbHistoryPairs) {
+			console.log("dbHistoryPairs: " + dbHistoryPairs);
+			var rawHistoryPairs = dbHistoryPairs[0];
+			console.log("RawhistoryPairs: " + rawHistoryPairs);
+			res.render("results", {
+				historyObject: rawHistoryPairs
+			});
+		});
+	});
+
+	// RESULTS PAGE JUST FOR MY TESTING - Kyle
+	app.get("/results", function (req, res) {
+		// Find most recent history
+		db.History.findAll({
+			raw: true,
+			attributes: ["meal", "winePairings", "wineSubType", "bookSuggestion", "winePairingsSubTypes"],
+			limit: 1,
+			order: [['createdAt', 'DESC']]
+		}).then(function (dbHistoryPairs) {
+			console.log("dbHistoryPairs: " + dbHistoryPairs);
+			var rawHistoryPairs = dbHistoryPairs[0];
+			console.log("RawhistoryPairs: " + rawHistoryPairs);
+			res.render("results", {
+				historyObject: rawHistoryPairs
+			});
+		});
+	});
+
   app
     .route("/login")
     .get(function(req, res) {
@@ -76,22 +114,6 @@ module.exports = function (app) {
       res.render("search");
     }
   });
-
-  //
-  // Load results page and display latest match
-  app.get("/search", function(req, res) {
-    // // Find most recent history
-    // db.History.findAll({
-    //   raw: true,
-    //   attributes: ["meal", "winePairings"],
-    //   limit: 1,
-    //   order: [["createdAt", "DESC"]]
-    // }).then(function(dbHistoryPairs) {
-    //   console.log("dbHistoryPairs: " + dbHistoryPairs);
-    //   var rawHistoryPairs = dbHistoryPairs[0];
-    //   console.log("RawhistoryPairs: " + rawHistoryPairs);
-      res.render("search");
-    });
   
     // Load example page and pass in an example by id
     app.get("/example/:id", function(req, res) {

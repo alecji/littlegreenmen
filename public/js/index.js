@@ -9,9 +9,11 @@ $(document).ready(function(){
 // Get references to page elements
 var $mealText = $("#meal-input");
 var $submitBtn = $("#submit");
-var $bookSubmitBtn = $("#bookSubmit");
+var $wineTypeSubmitBtn = $("#wineTypeSubmit");
+var $wineSubTypeSubmitBtn = $("#wineSubTypeSubmit");
 // define global variables
-var winePairArray = []
+var winePairArray = [];
+var wineSubTypeArray = [];
 var descriptionExtract;
 var bookOutput = [];
 var bookTitle = [];
@@ -84,27 +86,81 @@ var handleMealSubmit = function (event) {
     // run matching logic
     for (var i = 0; i < data.length; i++)
       if (mealText.text === data[i]["meal"]) {
-        winePairArray += data[i]["winePair"];
+        winePairArray.push(data[i]["winePair"]);
       }
     console.log(winePairArray)
     var mealString = JSON.stringify(mealText.text)
-    var wineString = JSON.stringify(winePairArray)
+    var wineString = JSON.stringify(winePairArray.join())
+    console.log(wineString)
+    console.log(winePairArray)
+    // Find the matching subtypes for the types
     // Make a newHistory object
     var newHistory = {
       meal: mealString,
-      winePairings: wineString,
+      winePairings: wineString
+    };
+    console.log(newHistory);
+    $.post("/api/history", newHistory)
+      // On success, run the following code
+      .then(function (result) {
+        console.log(winePairArray);
+
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+
+      })
+  })
+};
+
+// handleWineTypeSubmit is called whenever we submit a new Wine Type request
+// Find the matching wine subtypes in the DB and refresh the page
+var handleWineTypeSubmit = function (event) {
+  event.preventDefault();
+
+  // var wineType = {
+  //   text: $wineTypeSubmitBtn.val().trim(),
+  // }
+
+  // STAND IN
+  var wineType = "Bold Red";
+
+  API.getSubTypes().then(function (data) {
+    // run matching logic
+    for (var i = 0; i < data.length; i++)
+    console.log("data.length")
+      if (wineType === data[i]["type"]) {
+        wineSubTypeArray.push(data[i]["subType"]);
+      }
+    var wineSubTypeString = JSON.stringify(winePairArray.join())
+    console.log(wineSubTypeString)
+    console.log(wineSubTypeArray)
+    // Find the matching subtypes for the types
+    // Make a newHistory object
+    var newHistory = {
+      winePairingsSubType: wineSubTypeString
     };
     console.log(newHistory);
     $.post("/api/history", newHistory)
       // On success, run the following code
       .then(function (result) {
         console.log(result);
-        // reset page
-        location.reload();
+        // // reset page
+        // location.reload();
+        
+        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+
       })
   })
 };
-
 // handleBookSubmit is called whenever we submit a new book request
 // Find the matching book in the DB and refresh the page
 var handleBookSubmit = function (event) {
@@ -171,22 +227,22 @@ var handleBookSubmit = function (event) {
         // // putHistory = JSON.stringify(putHistory)
         // putHistory = jQuery.parseJSON(JSON.stringify(putHistory));
         $.post("/api/history", putHistory)
-        // On success, run the following code
-        .then(function (result) {
-          // console.log(result);
-          // reset page
-          location.reload();
-        });
+          // On success, run the following code
+          .then(function (result) {
+            // console.log(result);
+            // reset page
+            location.reload();
+          });
       });
     });
   });
 };
 
+
 // Add event listeners to the submit and book buttons
 $submitBtn.on("click", handleMealSubmit);
 
-
-$("select[name='foodDropdown']").change(function () {
-
+$wineSubTypeSubmitBtn.on("click", handleBookSubmit);
+$wineTypeSubmitBtn.on("click", handleWineTypeSubmit);
 
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);

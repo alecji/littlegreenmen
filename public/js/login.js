@@ -32,4 +32,5 @@ $("#SUsubmit").on("click", function() {
       location.replace("/login");
     }
   });
+
 });

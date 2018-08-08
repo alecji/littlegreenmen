@@ -84,7 +84,9 @@ module.exports = function(sequelize, DataTypes) {
     if (!data) {
       console.log("Seeding MealPairs Table");
       MealPair.bulkCreate(mealData, { returning: true });
-      // Otherwise leave the table alone
+
+            // Otherwise leave the table alone
+
     } else {
       console.log("Table Previously Seeded");
     }

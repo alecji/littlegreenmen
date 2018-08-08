@@ -1,4 +1,5 @@
 // Dropdown form Initialization
+
 $(document).ready(function () {
   $('select').formSelect()
 });
@@ -45,10 +46,13 @@ $("select[name='foodDropdown']").change(function () {
   } else if ($(this).val() === "Sweets") {
     console.log("Sweets sub type");
   }
+
 });
 
+//  $("#redBtn").on("click", function () {
+//   var newBtn = ("<button>");
 
-//*****
+
 
 // //When user clicks on dropdown menu
 // $(".input-field").on("click", function () {
@@ -134,5 +138,4 @@ $("select[name='foodDropdown']").change(function () {
 
 // })
 
-//************************* */
 
