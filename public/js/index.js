@@ -69,10 +69,19 @@ var API = {
 // handleMealSubmit is called whenever we submit a new request
 // Find the matching wine in the DB and refresh the page
 var handleMealSubmit = function (event) {
+
+};
+
+
+$("select[name='foodDropdown']").change(function (event) {
   event.preventDefault();
+  winePairArray = [];
+  $(".mainWines").empty();
+
+  console.log("!!!!!!: " +this)
 
   var mealText = {
-    text: $mealText.val().trim(),
+    text: $(this).val().trim(),
   };
 
   if (!(mealText.text)) {
@@ -84,11 +93,12 @@ var handleMealSubmit = function (event) {
     // run matching logic
     for (var i = 0; i < data.length; i++)
       if (mealText.text === data[i]["meal"]) {
-        winePairArray += data[i]["winePair"];
+        winePairArray.push(data[i]["winePair"]) ;
       }
-    console.log(winePairArray)
+    console.log("WINEPAIRARRAY: " + winePairArray)
     var mealString = JSON.stringify(mealText.text)
     var wineString = JSON.stringify(winePairArray)
+
     // Make a newHistory object
     var newHistory = {
       meal: mealString,
@@ -100,10 +110,18 @@ var handleMealSubmit = function (event) {
       .then(function (result) {
         console.log(result);
         // reset page
-        location.reload();
+        // location.reload();
       })
-  })
-};
+      for (var i = 0; i < winePairArray.length; i++) {
+        var button = $("<div class='col s3'><a class='wavesw-effect waves-light btn'>"+ winePairArray[i] + "</a></div>")
+        $(".mainWines").append(button)
+      }
+  })  
+
+  //BUTTON CREATION
+
+})
+
 
 // handleBookSubmit is called whenever we submit a new book request
 // Find the matching book in the DB and refresh the page
@@ -184,9 +202,6 @@ var handleBookSubmit = function (event) {
 
 // Add event listeners to the submit and book buttons
 $submitBtn.on("click", handleMealSubmit);
-
-
-$("select[name='foodDropdown']").change(function () {
 
 
 // $exampleList.on("click", ".delete", handleDeleteBtnClick);
