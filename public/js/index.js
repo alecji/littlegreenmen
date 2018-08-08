@@ -6,10 +6,13 @@ $(document).ready(function(){
 // Get references to page elements
 var $mealText = $("#meal-input");
 var $submitBtn = $("#submit");
-var $bookSubmitBtn = $("#book");
+var $bookSubmitBtn = $("#bookSubmit");
 // define global variables
-var winePairArray = []
+var winePairArray = [];
 var descriptionExtract;
+var bookOutput = [];
+var bookTitle = [];
+var descriptionExtractString;
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveHistory: function (newHistory) {
@@ -36,7 +39,7 @@ var API = {
   },
   getNYT: function () {
     return $.ajax({
-      url: "http://api.nytimes.com/svc/books/v3/lists?key=e33525e3c9314318878c888c1b3671d0",
+      url: "http://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=e33525e3c9314318878c888c1b3671d0",
       type: "GET",
     });
   }
@@ -92,6 +95,10 @@ var handleBookSubmit = function (event) {
   event.preventDefault();
 
   var userSelectedSubType;
+  // STAND IN FOR TESTING
+  userSelectedSubType = "Malvasia"
+
+  console.log(userSelectedSubType);
 
   API.getSubTypes().then(function (data) {
     // run matching logic
@@ -99,22 +106,36 @@ var handleBookSubmit = function (event) {
       // match subtype
       if (userSelectedSubType === data[i]["subType"]) {
         // extract description words from data string
-        var descriptionExtractString = data[i]["description"]
+        descriptionExtractString = data[i]["description"]
         // split string to array
         descriptionExtract = descriptionExtractString.split(", ")
       }
     }
-    API.getNYT.then(function (data) {
-
-      console.log(winePairArray)
-      var mealString = JSON.stringify(mealText.text)
-      var wineString = JSON.stringify(winePairArray)
+    // for later query url manipulation
+    var queryURL;
+    API.getNYT().then(function (data) {
+      console.log(data.results.lists[0].books[0]);
+      console.log(data.results.lists[0].books[0]["description"].length)
+      // for all books returned
+      for (var j = 0; data.results.lists[0].books.length; j++) {
+        // store the specific description and lowercase
+        var descriptionLower = data.results.lists[0].books[j]["description"].toLowerCase();
+        bookTitle = data.results.lists[0].books[j]["title"];
+        // for all wine descriptions extract 
+        for (var k = 0; k < descriptionExtract.length; k++) {
+          // if wine description matches a word in the book description
+          if (descriptionLower.includes(descriptionExtract[k])) {
+            bookOutput.push(bookTitle);
+          }
+        }
+      }
       // Make a newHistory object
       var newHistory = {
         meal: mealString,
-        winePairings: wineString
-      }
-        ;
+        winePairings: wineString,
+        wineSubType: userSelectedSubType,
+        bookSuggestion: bookTitle
+      };
 
       console.log(newHistory)
 
@@ -124,9 +145,9 @@ var handleBookSubmit = function (event) {
         .then(function () {
           // reset page
           location.reload();
-        })
-    })
-  })
+        });
+    });
+  });
 };
 
 // Add event listeners to the submit and book buttons
