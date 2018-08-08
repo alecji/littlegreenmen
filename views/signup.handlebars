@@ -2,7 +2,7 @@
 <div id="container">
 
   <video id="background_video" loop muted autoplay>
-    <source src="../public/assets/WINE_POUR_SLOW_MOTION.mp4" type="video/mp4">
+    <source src="/assets/WINE_POUR_SLOW_MOTION.mp4" type="video/mp4">
   </video>
 </div>
 
@@ -20,19 +20,19 @@
     <form class="col s12">
       <div class="row">
         <div class="input-field col s6">
-          <input id="user_name" type="text" class="validate">
+          <input id="SUuser_name" type="text" class="validate">
           <label for="user_name">User Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="email" type="email" class="validate">
+          <input id="SUemail" type="email" class="validate">
           <label for="email">Email</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input id="password" type="password" class="validate">
+          <input id="SUpassword" type="password" class="validate">
           <label for="password">Password</label>
         </div>
       </div>
@@ -41,7 +41,7 @@
 
   <div id="links">
     <!-- Sign Up button -->
-    <a href="/signup">Sign Up</a>
+    <a id="SUsubmit" type="submit">Sign Up</a>
 
 
   </div>
@@ -56,4 +56,4 @@
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
-<script src="/js/index.js"></script>
+<script src="/js/login.js"></script>
