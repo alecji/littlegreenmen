@@ -41,6 +41,14 @@ module.exports = function (app) {
     });
 
 
+		app.route("/history")
+		.get( function (req, res) {
+			res.render("history");
+		})
+		.post(function (req, res) {
+			res.render("history")
+		});
+
 	//
 	// Load results page and display latest match
 	app.get("/search", function (req, res) {
