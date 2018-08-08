@@ -6,7 +6,7 @@ module.exports = function (sequelize, DataTypes) {
         country: DataTypes.TEXT
     });
 
-    SubType.sync();
+    // SubType.sync();
 
     // DATA FOR THE MODEL
     var subTypeData = [
@@ -14,7 +14,7 @@ module.exports = function (sequelize, DataTypes) {
             subType: "Sauvignon Blanc",
             type: "Dry White",
             description: "bright, crisp, refreshing",
-            country: "France "
+            country: "France"
         },
         {
             subType: "Grüner Veltliner",

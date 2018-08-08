@@ -119,20 +119,20 @@ var handleMealSubmit = function (event) {
 var handleWineTypeSubmit = function (event) {
   event.preventDefault();
 
-  var wineType = {
-    text: $wineTypeSubmitBtn.val().trim(),
-  }
+  // var wineType = {
+  //   text: $wineTypeSubmitBtn.val().trim(),
+  // }
 
   // STAND IN
-  wineType = "Bold Red"
+  var wineType = "Bold Red";
 
   API.getSubTypes().then(function (data) {
     // run matching logic
     for (var i = 0; i < data.length; i++)
-      if (wineType.text === data[i]["type"]) {
+    console.log("data.length")
+      if (wineType === data[i]["type"]) {
         wineSubTypeArray.push(data[i]["subType"]);
       }
-    console.log(wineSubTypeArray)
     var wineSubTypeString = JSON.stringify(winePairArray.join())
     console.log(wineSubTypeString)
     console.log(wineSubTypeArray)
