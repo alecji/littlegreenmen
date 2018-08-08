@@ -1,4 +1,3 @@
-
 // Dropdown form Initialization
 $(document).ready(function () {
   $('select').formSelect()
@@ -136,3 +135,4 @@ $("select[name='foodDropdown']").change(function () {
 // })
 
 //************************* */
+
