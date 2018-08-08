@@ -1,11 +1,10 @@
-module.exports = function (sequelize, DataTypes) {
-    var History = sequelize.define("History", {
-      meal: DataTypes.TEXT,
-      winePairings: DataTypes.TEXT
-    });
-  
-    History.sync();
+module.exports = function(sequelize, DataTypes) {
+  var History = sequelize.define("History", {
+    meal: DataTypes.TEXT,
+    winePairings: DataTypes.TEXT
+  });
 
-    return History;
+  History.sync();
+
+  return History;
 };
-  

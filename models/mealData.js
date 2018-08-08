@@ -1,5 +1,4 @@
-
-module.exports = function (sequelize, DataTypes) {
+module.exports = function(sequelize, DataTypes) {
   var MealPair = sequelize.define("MealPair", {
     meal: DataTypes.TEXT,
     winePair: DataTypes.TEXT
@@ -11,11 +10,11 @@ module.exports = function (sequelize, DataTypes) {
   var mealData = [
     {
       meal: "Vegetables",
-      winePair: "Dry White",
+      winePair: "Dry White"
     },
     {
       meal: "Vegetables",
-      winePair: "Sparkling",
+      winePair: "Sparkling"
     },
     {
       meal: "Roasted Vegetables",
@@ -77,22 +76,21 @@ module.exports = function (sequelize, DataTypes) {
       meal: "Sweets",
       winePair: "Dessert Wine"
     }
-  ]
+  ];
 
   // CHECK TO SEE IF TABLE HAS BEEN SEEDED
-  MealPair.findOne({ where: {meal: 'Vegetables'} }).then(function(data) {
+  MealPair.findOne({ where: { meal: "Vegetables" } }).then(function(data) {
     // If no matches found seed the table
     if (!data) {
-      console.log("Seeding MealPairs Table")
+      console.log("Seeding MealPairs Table");
       MealPair.bulkCreate(mealData, { returning: true });
-    // Otherwise leave the table alone
+      // Otherwise leave the table alone
     } else {
       console.log("Table Previously Seeded");
     }
-  })
+  });
 
   MealPair.sync();
 
   return MealPair;
 };
-

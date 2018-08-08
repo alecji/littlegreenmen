@@ -1,4 +1,3 @@
-
 // // All Data
 // var allData = [
 //     {
@@ -271,8 +270,5 @@
 //         type: "Dessert",
 //     }
 // ]
-
-
-
 
 // module.exports = data;

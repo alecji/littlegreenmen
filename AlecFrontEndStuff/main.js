@@ -1,12 +1,9 @@
-
 // Dropdown form Initialization
-$(document).ready(function(){
-  $('select').formSelect();
+$(document).ready(function() {
+  $("select").formSelect();
 });
 
+//  $("#redBtn").on("click", function () {
+//   var newBtn = ("<button>");
 
-  //  $("#redBtn").on("click", function () {
-  //   var newBtn = ("<button>");
-
-
-  //  });
+//  });

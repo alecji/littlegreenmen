@@ -7,7 +7,7 @@ module.exports = function(app) {
       res.json(dbMealPair);
     });
   });
-  
+
   // Get most recent history
   app.get("/api/history", function(req, res) {
     db.History.findAll({}).then(function(dbHistory) {
