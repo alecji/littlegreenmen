@@ -8,6 +8,7 @@ module.exports = function (app) {
     });
   });
 
+
   // Get all wine subtypes
   app.get("/api/subtypes", function (req, res) {
     db.SubType.findAll({}).then(function (dbSubType) {
