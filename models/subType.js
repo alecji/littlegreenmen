@@ -11,6 +11,12 @@ module.exports = function (sequelize, DataTypes) {
     // DATA FOR THE MODEL
     var subTypeData = [
         {
+            subType: "Grüner Veltliner",
+            type: "Dry White",
+            description: "zesty, heat, summer",
+            country: "Austria"
+        },
+        {
             subType: "Malvasia",
             type: "Sweet White",
             description: "mediterranean, sea, islands",

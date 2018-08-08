@@ -99,7 +99,7 @@ var handleMealSubmit = function (event) {
       .then(function (result) {
         console.log(result);
         // reset page
-        // location.reload();
+        location.reload();
       })
   })
 };
@@ -111,7 +111,7 @@ var handleBookSubmit = function (event) {
 
   var userSelectedSubType;
   // STAND IN FOR TESTING
-  userSelectedSubType = "Malbec"
+  userSelectedSubType = "Grüner Veltliner"
 
   console.log(userSelectedSubType);
 
@@ -152,7 +152,7 @@ var handleBookSubmit = function (event) {
       // Get most recent history id
       API.getHistory().then(function (data) {
         var historyLength = data.length - 1;
-        // get the ID of the most recent history entry
+        // get the ID of the most recent history entry and parse
         historyIdNum = data[historyLength]["id"]
         historyId = historyIdNum.toString();
         idString = JSON.stringify(historyId);
@@ -172,9 +172,9 @@ var handleBookSubmit = function (event) {
         $.post("/api/history", putHistory)
         // On success, run the following code
         .then(function (result) {
-          console.log(result);
+          // console.log(result);
           // reset page
-          // location.reload();
+          location.reload();
         });
       });
     });

@@ -24,21 +24,22 @@ module.exports = function (app) {
 
   // Create a new history entry or update most recent one
   app.post("/api/history", function (req, res) {
-    console.log("body: %j", req.body)
+    // console.log("body: %j", req.body)
     if (req.body.bookSuggestion) {
       db.History.update(
         {
-          wineSubType: req.body.wineSubType,
-          bookSuggestion: req.body.bookSuggestion
+          wineSubType: JSON.parse(req.body.wineSubType),
+          bookSuggestion: JSON.parse(req.body.bookSuggestion)
         },
         {
           // where the id matches the most recent history id        
           where:
           {
-            id: req.body.recentId
+            id: JSON.parse(req.body.recentId)
           }
         })
         .then(function (dbHistory) {
+          // console.log(dbHistory + " @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
           res.json(dbHistory);
         });
     }
