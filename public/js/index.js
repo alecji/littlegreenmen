@@ -15,6 +15,7 @@ var bookTitle = [];
 var descriptionExtractString;
 var historyId;
 // The API object contains methods for each kind of request we'll make
+
 var API = {
   saveHistory: function (newHistory) {
     return $.ajax({
@@ -54,6 +55,7 @@ var API = {
       url: "api/subtypes",
       type: "GET",
     });
+
   },
   getNYT: function () {
     return $.ajax({
@@ -62,6 +64,7 @@ var API = {
     });
   }
 };
+
 
 // handleMealSubmit is called whenever we submit a new request
 // Find the matching wine in the DB and refresh the page
