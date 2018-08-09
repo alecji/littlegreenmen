@@ -69,62 +69,121 @@ var API = {
 
 // handleMealSubmit is called whenever we submit a new request
 // Find the matching wine in the DB and refresh the page
-
-$("select[name='foodDropdown']").change(function () {
   
-  event.preventDefault();
-
-  $(".mainWines").empty();
-  winePairArray = [];
-
-  var mealText = {
-    text: $(this).val().trim(),
-  };
-
-  if (!(mealText.text)) {
-    alert("You must enter a meal!");
-    return;
-  }
-
-  API.getPairings().then(function (data) {
-    // run matching logic
-    for (var i = 0; i < data.length; i++)
-      if (mealText.text === data[i]["meal"]) {
-        winePairArray.push(data[i]["winePair"]);
-      }
-    console.log(winePairArray)
-    var mealString = JSON.stringify(mealText.text)
-    var wineString = JSON.stringify(winePairArray.join())
-    console.log(wineString)
-    console.log(winePairArray)
-    // Find the matching subtypes for the types
-    // Make a newHistory object
-    var newHistory = {
-      meal: mealString,
-      winePairings: wineString
+  $("select[name='foodDropdown']").change(function () {
+  
+    event.preventDefault();
+  
+    $(".mainWines").empty();
+    winePairArray = [];
+  
+    var mealText = {
+      text: $(this).val().trim(),
     };
-    console.log(newHistory);
-    $.post("/api/history", newHistory)
-      // On success, run the following code
-      .then(function (result) {
-        console.log(winePairArray);
-
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
-
-      })
-
-    for (var i=0; i < winePairArray.length; i++) {
-      var button = $("<div class = 'col s12 button1'><a href='#'>" + winePairArray[i] + "</a></div>")
-      $(".mainWines").append(button)
+  
+    if (!(mealText.text)) {
+      alert("You must enter a meal!");
+      return;
     }
-  })
-});
+  
+    API.getPairings().then(function (data) {
+      // run matching logic
+      for (var i = 0; i < data.length; i++)
+        if (mealText.text === data[i]["meal"]) {
+          winePairArray.push(data[i]["winePair"]);
+        }
+      console.log(winePairArray)
+      var mealString = JSON.stringify(mealText.text)
+      var wineString = JSON.stringify(winePairArray.join())
+      console.log(wineString)
+      console.log(winePairArray)
+      // Find the matching subtypes for the types
+      // Make a newHistory object
+      var newHistory = {
+        meal: mealString,
+        winePairings: wineString
+      };
+      console.log(newHistory);
+      $.post("/api/history", newHistory)
+        // On success, run the following code
+        .then(function (result) {
+          console.log(winePairArray);
+  
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE TYPE BUTTON APPEND LOGIC GOES HERE*****************
+  
+        })
+  
+      for (var i=0; i < winePairArray.length; i++) {
+        var button = $("<div class = 'col s12 button1'><a href='#'>" + winePairArray[i] + "</a></div>")
+        $(".mainWines").append(button)
+      }
+    })
+  });
+
+  $(document).on("click", ".button1", function() {
+    event.preventDefault();
+    console.log("check")
+    wineSubTypeArray = [];
+    $(".subWines").empty();
+    // var wineType = {
+    //   text: $wineTypeSubmitBtn.val().trim(),
+    // }
+  
+    var wineType = JSON.stringify($(this).text());
+    console.log(wineType)
+    API.getSubTypes().then(function (data) {
+      // run matching logic
+      console.log(data[1]["type"])
+      for (var i = 0; i < 33; i++) {
+        var typeOf = JSON.stringify(data[i]["type"]);
+        console.log(typeOf)
+        console.log(data[i]["subType"])
+        if (wineType == typeOf) {
+          wineSubTypeArray.push(data[i]["subType"]);
+        }
+      }
+     
+      console.log(wineSubTypeArray)
+      var wineSubTypeString = JSON.stringify(winePairArray.join())
+      console.log(wineSubTypeString)
+      console.log(wineSubTypeArray)
+      // Find the matching subtypes for the types
+      // Make a newHistory object
+      var newHistory = {
+        winePairingsSubType: wineSubTypeString
+      };
+      console.log(newHistory);
+      $.post("/api/history", newHistory)
+        // On success, run the following code
+        .then(function (result) {
+          console.log(result);
+          // // reset page
+          // location.reload();
+  
+          // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+          // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
+  
+        })
+    })
+  
+  
+    for (var i=0; i < wineSubTypeArray.length; i++) {
+      var button = $("<div class = 'col s12 button2'><a href='#'>" + wineSubTypeArray[i] + "</a></div>")
+      $(".subWines").append(button)
+    }
+  });
+
+
+
 
 
 
@@ -177,55 +236,7 @@ $("select[name='foodDropdown']").change(function () {
 //   })
 // };
 
-$(".button1").on("click", function() {
-  event.preventDefault();
-  wineSubTypeArray = [];
-  $(".subWines").empty();
-  // var wineType = {
-  //   text: $wineTypeSubmitBtn.val().trim(),
-  // }
 
-  var wineType = $(this).val().trim();
-
-  API.getSubTypes().then(function (data) {
-    // run matching logic
-    console.log(data)
-    for (var i = 0; i < data.length; i++)
-      console.log("data.length")
-    if (wineType === data[i]["type"]) {
-      wineSubTypeArray.push(data[i]["subType"]);
-    }
-    console.log(wineSubTypeArray)
-    var wineSubTypeString = JSON.stringify(winePairArray.join())
-    console.log(wineSubTypeString)
-    console.log(wineSubTypeArray)
-    // Find the matching subtypes for the types
-    // Make a newHistory object
-    var newHistory = {
-      winePairingsSubType: wineSubTypeString
-    };
-    console.log(newHistory);
-    $.post("/api/history", newHistory)
-      // On success, run the following code
-      .then(function (result) {
-        console.log(result);
-        // // reset page
-        // location.reload();
-
-        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
-        // #WINE SUB TYPE BUTTON APPEND LOGIC GOES HERE*****************
-
-      })
-  })
-
-  for (var i=0; i < wineSubTypeArray.length; i++) {
-    var button = $("<div class = 'col s12 button2'><a href='#'>" + wineSubTypeArray[i] + "</a></div>")
-    $(".subWines").append(button)
-  }
-})
 
 // handleWineTypeSubmit is called whenever we submit a new Wine Type request
 // Find the matching wine subtypes in the DB and refresh the page
