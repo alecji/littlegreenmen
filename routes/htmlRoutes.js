@@ -62,7 +62,7 @@ module.exports = function (app) {
 			console.log("dbHistoryPairs: " + dbHistoryPairs);
 			var rawHistoryPairs = dbHistoryPairs[0];
 			console.log("RawhistoryPairs: " + rawHistoryPairs);
-			res.render("results", {
+			res.render("search", {
 				historyObject: rawHistoryPairs
 			});
 		});
@@ -80,7 +80,7 @@ module.exports = function (app) {
 			console.log("dbHistoryPairs: " + dbHistoryPairs);
 			var rawHistoryPairs = dbHistoryPairs[0];
 			console.log("RawhistoryPairs: " + rawHistoryPairs);
-			res.render("results", {
+			res.render("search", {
 				historyObject: rawHistoryPairs
 			});
 		});

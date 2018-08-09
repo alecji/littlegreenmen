@@ -53,7 +53,7 @@
   #links {
     margin-top: 50px;
   }
-  #links a {
+   a {
     border: 2px solid rgba(255,255,255,0.20);
     border-radius: 61px;
     font-size: 12px;
