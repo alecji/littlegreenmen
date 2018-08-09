@@ -60,7 +60,7 @@ module.exports = function (app) {
                 {
                     // where the id matches the most recent history id
                     where: {
-                        id: JSON.parse(req.body.recentId)
+                        id: req.body.recentId
                     }
                 })
                 .then(function (dbHistory) {
